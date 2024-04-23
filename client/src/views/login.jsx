@@ -3,7 +3,7 @@ import Swal from "sweetalert2"
 import axios from "axios"
 import { useNavigate } from "react-router-dom";
 
-const BASE_URL = "https://api.h8-legend.phase2.foxhub.space"
+const BASE_URL = "https://localhost:3000"
 
 export default function LoginPage() {
 
