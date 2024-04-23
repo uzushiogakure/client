@@ -55,7 +55,7 @@ export default function LoginPage() {
         className="flex h-screen w-full items-center justify-center bg-gray-900 bg-cover bg-no-repeat"
         style={{
           backgroundImage:
-            'url("https://images.unsplash.com/photo-1499123785106-343e69e68db1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1748&q=80")',
+            'url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfnXilfh7OpQsOP3Rz9-H1GL0UiuQ9V829fg&usqp=CAU")',
         }}
       >
         <div className="rounded-xl bg-gray-800 bg-opacity-50 px-16 py-10 shadow-lg backdrop-blur-md max-sm:px-8">
