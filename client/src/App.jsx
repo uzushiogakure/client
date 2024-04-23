@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider, } from "react-router-dom";
 import "./App.css";
 import LoginPage from "./views/login";
 import RegisterPage from "./views/register";
+import Home from "./views/home";
 
 // function AlreadyLogin() {
 //     if(localStorage.access_token) return redirect("/")
@@ -22,6 +23,11 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <RegisterPage/>,
+    // loader: AlreadyLogin
+  },
+  {
+    path: "/",
+    element: <Home/>,
     // loader: AlreadyLogin
   },
 ]);
