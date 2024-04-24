@@ -1,13 +1,21 @@
 import { useState } from "react";
 import { socket } from "../utils/socket";
+import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function Chat() {
+  const { id } = useParams;
   const [inputMessage, setInputMessage] = useState("");
+  const UserId = useSelector((state) => state.users.data.id);
 
   const handleSend = (event) => {
     event.preventDefault();
 
-    socket.emit("message:new", inputMessage);
+    socket.emit("message:new", {
+      RoomId: id,
+      UserId,
+      content: inputMessage,
+    });
     setInputMessage("");
   };
   return (

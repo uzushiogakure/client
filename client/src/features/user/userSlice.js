@@ -28,7 +28,7 @@ export function login(body) {
   return async (dispatch) => {
     try {
       const { data } = await serverRequest.post("/login", body, {});
-      dispatch(stateUser(data));
+      dispatch(stateUser(data.data));
       dispatch(logInUser());
       localStorage.setItem("access_token", data.access_token);
     } catch (error) {
