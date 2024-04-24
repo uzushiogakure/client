@@ -10,6 +10,7 @@ export default function RegisterPage() {
     const navigate = useNavigate()
 
     const [input, setInput] = useState({
+        name: "",
         email: "",
         password: "",
     })
@@ -65,6 +66,16 @@ export default function RegisterPage() {
               <span className="text-gray-300">Group Chat Register</span>
             </div>
             <form onSubmit={handleSubmit}>
+              <div className="mb-4 text-lg">
+                <input
+                  className="rounded-3xl border-none bg-yellow-400 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
+                  type="text"
+                  name="name"
+                  id="name"
+                  onChange={handleInput}
+                  placeholder="Name"
+                />
+              </div>
               <div className="mb-4 text-lg">
                 <input
                   className="rounded-3xl border-none bg-yellow-400 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
