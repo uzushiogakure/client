@@ -36,25 +36,28 @@ export default function Chat() {
   return (
     <>
       <>
-        <div className="bg-gray-100 h-screen flex flex-col max-w-lg mx-auto">
+        <div className=" mt-10 mb-10 rounded-lg bg-gray-100 h-screen flex flex-col max-w-lg mx-auto">
           <div className="flex-1 overflow-y-auto p-4">
             <div className="flex flex-col space-y-2">
               {chatRoom.map((el) => {
                 if (el.UserId === UserId) {
                   return (
                     <div className="flex justify-end" key={el.id}>
-                      <div className="bg-blue-200 text-black p-2 rounded-lg max-w-xs">
+                      <div className="bg-yellow-300 text-black p-2 rounded-lg max-w-xs">
                         {el.content}
                       </div>
                     </div>
                   );
                 } else {
                   return (
-                    <div className="flex" key={el.id}>
-                      <div className="bg-gray-300 text-black p-2 rounded-lg max-w-xs">
-                        {el.content}
+                    <>
+                      <div>{el.User.name}</div>
+                      <div className="flex" key={el.id}>
+                        <div className="bg-yellow-500 text-black p-2 rounded-lg max-w-xs">
+                          {el.content}
+                        </div>
                       </div>
-                    </div>
+                    </>
                   );
                 }
               })}
@@ -71,7 +74,7 @@ export default function Chat() {
               />
               <button
                 type="submit"
-                className="bg-blue-500 text-white rounded-full p-2 ml-2 hover:bg-blue-600 focus:outline-none"
+                className="bg-yellow-500 text-white rounded-full p-2 ml-2 hover:bg-blue-600 focus:outline-none"
               ></button>
             </div>
           </form>
