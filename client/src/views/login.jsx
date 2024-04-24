@@ -45,10 +45,10 @@ export default function LoginPage() {
         className="flex h-screen w-full items-center justify-center bg-gray-900 bg-cover bg-no-repeat"
         style={{
           backgroundImage:
-            'url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfnXilfh7OpQsOP3Rz9-H1GL0UiuQ9V829fg&usqp=CAU")',
+            'url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfL7pdgWebHqzZiei_Je55h_HaENfsMrzQ8g&usqp=CAU")',
         }}
       >
-        <div className="rounded-xl bg-gray-800 bg-opacity-50 px-16 py-10 shadow-lg backdrop-blur-md max-sm:px-8">
+        <div className="rounded-xl bg-amber-700 bg-opacity-50 px-16 py-10 shadow-lg backdrop-blur-md max-sm:px-8">
           <div className="text-white">
             <div className="mb-8 flex flex-col items-center">
               <h1 className="mb-2 text-2xl">UZUSHIOGAKURE</h1>

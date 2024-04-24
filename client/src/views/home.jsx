@@ -14,12 +14,10 @@ export default function Home() {
   // console.log(data);
   return (
     <>
-      <div className="flex flex-row ...">
-        <div className="flex flex-wrap ...">
+      <div className="h-screen flex items-center justify-center">
           {data.map((el) => {
             return <Card key={el.id} el={el} />;
           })}
-        </div>
       </div>
     </>
   );

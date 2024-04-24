@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-export default function Navbar() {
+export default function Navbar_landing() {
     const navigate = useNavigate()
   return (
     <>
@@ -25,18 +25,15 @@ export default function Navbar() {
             className="flex lg:gap-8 gap-6 uppercase tracking-wider cursor-pointer text-lg items-center"
             id="navItems"
           >
-            <span className="group">
-              Services
+            <span className="group" onClick={()=>{navigate("/user/register")}}>
+              Register
               <div className="w-0 group-hover:w-full h-0.5 bg-white ease-in-out duration-500" />
             </span>
             <span className="group">
               About
               <div className="w-0 group-hover:w-full h-0.5 bg-white ease-in-out duration-500" />
             </span>
-            <span className="group" onClick={()=> {localStorage.clear(); navigate("/user/login")}}>
-              Logout
-              <div className="w-0 group-hover:w-full h-0.5 bg-white ease-in-out duration-500" />
-            </span>
+            
           </div>
           <div
             id="hamburger"
@@ -47,9 +44,8 @@ export default function Navbar() {
             id="mobileNav"
             className="fixed flex flex-col gap-8 pt-16 px-4 text-xl uppercase bg-teal-500 h-full inset-0 top-16 w-[70%] left-[-70%] ease-in-out duration-500 cursor-pointer"
           >
-            <span>Services</span>
+            <span>Register</span>
             <span>About</span>
-            <span>Logout</span>
           </div>
         </div>
       </nav>
