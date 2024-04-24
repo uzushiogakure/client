@@ -1,52 +1,47 @@
 import { useState } from "react";
-import Swal from "sweetalert2"
-import axios from "axios"
+import { useDispatch } from "react-redux";
+import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
-
-const BASE_URL = "https://localhost:3000"
+import { register } from "../features/user/userSlice";
 
 export default function RegisterPage() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-    const navigate = useNavigate()
+  const [input, setInput] = useState({
+    email: "",
+    password: "",
+  });
 
-    const [input, setInput] = useState({
-        email: "",
-        password: "",
-    })
+  function handleInput(event) {
+    const { name, value } = event.target;
 
-    function handleInput(event) {
-        const {name, value} = event.target
+    setInput({
+      ...input,
+      [name]: value,
+    });
+  }
 
-        setInput({
-            ...input,
-            [name] : value
-        })
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      await dispatch(register(input));
+
+      Swal.fire({
+        title: "Successfully Registered",
+        icon: "success",
+      });
+
+      navigate("/login");
+    } catch (error) {
+      console.log(error);
+      Swal.fire({
+        title: error.response.data.message,
+        icon: "error",
+      });
     }
-
-    const handleSubmit = async (event) => {
-        event.preventDefault()
-
-        try {
-            await axios({
-                method: "post",
-                url: BASE_URL + "/register",
-                data: input
-            })
-
-            Swal.fire({
-                title: "Successfully Registered",
-                icon: "success"
-            })
-
-            navigate("/login")
-        } catch (error) {
-            console.log(error);
-            Swal.fire({
-                title: error.response.data.message,
-                icon: "error"
-            })
-        }
-    }
+  };
 
   return (
     <>
