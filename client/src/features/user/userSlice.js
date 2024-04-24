@@ -2,7 +2,7 @@ import { serverRequest } from "../../utils/axios";
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  data: null,
+  user: null,
   isLogIn: false,
 };
 
@@ -17,7 +17,7 @@ export const userSlice = createSlice({
       state.isLogIn = false;
     },
     stateUser: (state, { payload }) => {
-      state.data = payload;
+      state.user = payload;
     },
   },
 });
