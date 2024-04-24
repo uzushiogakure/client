@@ -1,67 +1,24 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAllRoom } from "../features/room/roomSlice";
 import Card from "../components/card";
-import axios from "axios";
-import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
-
-const BASE_URL = "http://localhost:3000"
 
 export default function Home() {
+  const dispatch = useDispatch();
+  const data = useSelector((state) => state.rooms.listRoom);
 
-    const navigate = useNavigate()
+  useEffect(() => {
+    dispatch(fetchAllRoom());
+  }, []);
 
-    const [room, setRoom] = useState([])
-
-    async function fetchDataRoom () {
-        try {
-            const data = await axios({
-                method: "get",
-                url: BASE_URL + "/room",
-                headers: {
-                    Authorization: "Bearer " + localStorage.access_token
-                }
-            })
-            setRoom(data)
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    useEffect(()=> {
-        fetchDataRoom()
-    }, [])
-
-    async function handleJoin(id) {
-        try {
-            await axios({
-                method: "post",
-                url: BASE_URL + "room/" + id,
-                headers: {
-                    Authorization: "Bearer " + localStorage.access_token
-                }
-            })
-            Swal.fire({
-                title: "Successfully join",
-                icon: "success"
-            })
-            navigate("/chat")
-            
-        } catch (error) {
-            console.log(error);
-            Swal.fire({
-                title: error.response.data.message,
-                icon: "error"
-            })
-        }
-    }
-
+  // console.log(data);
   return (
     <>
       <div className="flex flex-row ...">
         <div className="flex flex-wrap ...">
-            {room.map((el)=> {
-                <Card el={el} handleJoin={handleJoin}/>
-            })}
+          {data.map((el) => {
+            return <Card key={el.id} el={el} />;
+          })}
         </div>
       </div>
     </>

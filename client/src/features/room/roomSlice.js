@@ -2,20 +2,24 @@ import { serverRequest } from "../../utils/axios";
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  data: [],
+  chatRoom: [],
+  listRoom: [],
 };
 
 export const roomSlice = createSlice({
   name: "room",
   initialState,
   reducers: {
-    stateRoom: (state, { payload }) => {
-      state.data = payload;
+    stateChatRoom: (state, { payload }) => {
+      state.chatRoom = payload;
+    },
+    stateListRoom: (state, { payload }) => {
+      state.listRoom = payload;
     },
   },
 });
 
-export const { stateRoom } = roomSlice.actions;
+export const { stateChatRoom, stateListRoom } = roomSlice.actions;
 
 export function fetchAllRoom() {
   return async (dispatch) => {
@@ -25,7 +29,7 @@ export function fetchAllRoom() {
           Authorization: `Bearer ` + localStorage.getItem("access_token"),
         },
       });
-      dispatch(stateRoom(data));
+      dispatch(stateListRoom(data));
     } catch (error) {
       console.log(error);
     }
@@ -35,12 +39,12 @@ export function fetchAllRoom() {
 export function fetchRoomChat(id) {
   return async (dispatch) => {
     try {
-      const { data } = await serverRequest.get("/chat-room/" + id, {
+      const { data } = await serverRequest.get("/room/" + id, {
         headers: {
           Authorization: `Bearer ` + localStorage.getItem("access_token"),
         },
       });
-      dispatch(stateRoom(data.Chats));
+      dispatch(stateChatRoom(data));
     } catch (error) {
       console.log(error);
     }
