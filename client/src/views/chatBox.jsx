@@ -1,12 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { socket } from "../utils/socket";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchRoomChat } from "../features/room/roomSlice";
 
 export default function Chat() {
-  const { id } = useParams;
+  const { id } = useParams();
+  console.log(id);
+  const dispatch = useDispatch();
   const [inputMessage, setInputMessage] = useState("");
   const UserId = useSelector((state) => state.users.data.id);
+  const chatRoom = useSelector((state) => state.rooms.data);
+
+  useEffect(() => {
+    dispatch(fetchRoomChat(id));
+  }, []);
 
   const handleSend = (event) => {
     event.preventDefault();
@@ -18,22 +26,31 @@ export default function Chat() {
     });
     setInputMessage("");
   };
+
+  socket.on("message:update", () => {
+    dispatch(fetchRoomChat(id));
+  });
   return (
     <>
       <>
         <div className="bg-gray-100 h-screen flex flex-col max-w-lg mx-auto">
           <div className="flex-1 overflow-y-auto p-4">
             <div className="flex flex-col space-y-2">
-              <div className="flex justify-end">
-                <div className="bg-blue-200 text-black p-2 rounded-lg max-w-xs">
-                  Hey, how&apos;s your day going?
-                </div>
-              </div>
-              <div className="flex">
-                <div className="bg-gray-300 text-black p-2 rounded-lg max-w-xs">
-                  Not too bad, just a bit busy. How about you?
-                </div>
-              </div>
+              {chatRoom.map((el) => {
+                if (el.User.id == UserId) {
+                  <div className="flex justify-end">
+                    <div className="bg-blue-200 text-black p-2 rounded-lg max-w-xs">
+                      {el.content}
+                    </div>
+                  </div>;
+                } else {
+                  <div className="flex">
+                    <div className="bg-gray-300 text-black p-2 rounded-lg max-w-xs">
+                      {el.content}
+                    </div>
+                  </div>;
+                }
+              })}
             </div>
           </div>
           <form onSubmit={handleSend}>
