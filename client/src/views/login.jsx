@@ -1,52 +1,42 @@
 import { useState } from "react";
-import Swal from "sweetalert2"
-import axios from "axios"
+import Swal from "sweetalert2";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
-const BASE_URL = "https://localhost:3000"
+import { login } from "../features/user/userSlice";
 
 export default function LoginPage() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-    const navigate = useNavigate()
+  const [input, setInput] = useState({
+    email: "",
+    password: "",
+  });
 
-    const [input, setInput] = useState({
-        email: "",
-        password: "",
-    })
+  function handleInput(event) {
+    const { name, value } = event.target;
 
-    function handleInput(event) {
-        const {name, value} = event.target
+    setInput({
+      ...input,
+      [name]: value,
+    });
+  }
 
-        setInput({
-            ...input,
-            [name] : value
-        })
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      await dispatch(login(input));
+
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+      Swal.fire({
+        title: error.response.data.message,
+        icon: "error",
+      });
     }
-
-    const handleSubmit = async (event) => {
-        event.preventDefault()
-
-        try {
-            const data = await axios({
-                method: "post",
-                url: BASE_URL + "/login",
-                data: input
-            })
-
-            console.log(data);
-            localStorage.access_token = data.data.token
-
-            navigate("/")
-        } catch (error) {
-            console.log(error);
-            Swal.fire({
-                title: error.response.data.message,
-                icon: "error"
-            })
-        }
-    }
-
-    
+  };
 
   return (
     <>
