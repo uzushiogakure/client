@@ -14,10 +14,10 @@ export default function Home() {
   // console.log(data);
   return (
     <>
-      <div className="h-screen flex items-center justify-center">
-          {data.map((el) => {
-            return <Card key={el.id} el={el} />;
-          })}
+      <div className="h-screen flex items-center justify-center gap-5">
+        {data.map((el) => {
+          return <Card key={el.id} el={el} />;
+        })}
       </div>
     </>
   );
