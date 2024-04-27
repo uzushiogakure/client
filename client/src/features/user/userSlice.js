@@ -38,9 +38,12 @@ export function login(body) {
 }
 
 export function register(body) {
-  return async () => {
-    try {
-      await serverRequest.post("/register", body, {});
+    
+    return async () => {
+        // console.log(body);
+        try {
+            const data = await serverRequest.post("/register", body, {});
+            console.log(data);
     } catch (error) {
       console.log(error);
     }

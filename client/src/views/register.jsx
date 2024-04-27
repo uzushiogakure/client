@@ -29,12 +29,12 @@ export default function RegisterPage() {
     try {
       await dispatch(register(input));
 
+      navigate("/user/login");
       Swal.fire({
         title: "Successfully Registered",
         icon: "success",
       });
 
-      navigate("/login");
     } catch (error) {
       console.log(error);
       Swal.fire({

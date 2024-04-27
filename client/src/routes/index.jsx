@@ -11,7 +11,7 @@ const router = createBrowserRouter([
     path: "/user",
     element: <Layout_landing />,
     loader: () => {
-      return localStorage.getItem("access_token") ? redirect("/home") : null;
+      return localStorage.getItem("access_token") ? redirect("/") : null;
     },
     children: [
       {
